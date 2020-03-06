@@ -1,13 +1,9 @@
------------------------------------------------------------------------------------------
---
--- main.lua
---
------------------------------------------------------------------------------------------
-
+--------------------------------------------------------------------------------------
 -- Title: Local Variables
 -- Name: Adam Winogron
 -- Course: ICS2O/3C
 -- This program displays a rectangle and sows its area
+--------------------------------------------------------------------------------------
 
 -- create my local variables
 local areaText
@@ -16,6 +12,12 @@ local myRectangle
 local widthOfRectangle = 350
 local heightOfRectangle = 200
 local areaOfRectangle
+local myCircle
+local radiusOfCircle = 100
+local PI = 3.14
+local areaOfCircle
+local areaText2
+local textSize2 = 50
 
 -- set the background clour of my screen. Remember that colours are between 0 and 1.
 display.setDefault("background", 22/255, 199/255, 243/255)
@@ -44,7 +46,7 @@ myRectangle:setStrokeColor( 0/255, 0/255, 0/255)
 -- calculate the area
 areaOfRectangle = widthOfRectangle * heightOfRectangle
 
--- write the area on screen. take ino consideration the size of the font when positioning it on the screen
+-- write the area on screen. 
 areaText = display.newText("The area of this rectangle with a width of \n" ..
 	widthOfRectangle .. " and a height of " .. heightOfRectangle .. " is " ..
 	areaOfRectangle .. " pixels.", 0, 0, Arial, textSize)
@@ -53,7 +55,41 @@ areaText = display.newText("The area of this rectangle with a width of \n" ..
 areaText.anchorX = 0
 areaText.anchorY = 0
 areaText.x = 20
-areaText.y = display.contentHeight/2
+areaText.y = display.contentHeight/3
 
 -- set the colour of the newText
 areaText:setTextColor( 1, 0, 1)
+
+--draw the circle
+myCircle = display.newCircle(0, 0, radiusOfCircle )
+
+-- anchor the circle underneath the rectangle's text and set it's (x,y) position
+myCircle.anchorX = 0
+myCircle.anchorY = 0
+myCircle.x = 20
+myCircle.y = 400
+
+-- set the width of the circle's border
+myCircle.strokeWidth = 20
+
+-- change the colour of the circle's border
+myCircle:setStrokeColor(0,0,0)
+
+-- change the colour of the circle
+myCircle:setFillColor( 0/255, 255/255, 171/255 )
+
+-- calculate the area of the circle
+areaOfCircle = radiusOfCircle * radiusOfCircle * PI
+
+-- write the area on the screen.
+areaText2 = display.newText("The area of this circle with a radius of \n" .. 
+	radiusOfCircle .. " is " .. areaOfCircle .. " pixels. ", 0, 0, Arial, textSize2)
+
+-- anchor the text and set it's (x,y) poition
+areaText2.anchorX = 0
+areaText2.anchorY = 0
+areaText2.x = 20
+areaText2.y = display.contentHeight/1.2
+
+-- change the colour of the text
+areaText2:setTextColor(0/255, 255/255, 171/255)
