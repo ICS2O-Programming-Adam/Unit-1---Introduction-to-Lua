@@ -4,6 +4,7 @@
 --
 -----------------------------------------------------------------------------------------
 
+local textObjectSignature
 
 -- print a greeting to the console
 print ("**** Hello Adam!")
@@ -26,7 +27,7 @@ textObject:setTextColor(22/255, 243/255, 73/255)
 
 -- displays text on your screen at position x = 500 and y = 500 with
 -- a defaul font style and font size of 50
-textObject = display.newText( "By: Adam Winogron", 500, 500, nil, 50)
+textObjectSignature = display.newText( "By: Adam Winogron", 500, 500, nil, 50)
 
 -- set the color of the text
-textObject:setTextColor(22/255, 199/255, 243/255)
+textObjectSignature:setTextColor(22/255, 199/255, 243/255)
