@@ -58,7 +58,7 @@ local function RedButtonListener(touch)
 		blueButton.isVisible = true
 		redButton.isVisible = false
 		textObject.isVisible = false
-	else ()
+	end
 
 	if (touch.phase == "ended") then
 		blueButton.isVisible = false
