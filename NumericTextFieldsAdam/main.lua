@@ -17,13 +17,13 @@ display.setDefault("background", 155/255, 2/255, 2/255)
 
 -- create the local variables 
 local questionObject
-local correctObject
 local numericField 
 local randomNumber1
 local randomNumber2
 local userAnswer
 local correctAnswer
 local incorrectObject
+local correctObject
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
