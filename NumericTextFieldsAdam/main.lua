@@ -23,6 +23,7 @@ local randomNumber1
 local randomNumber2
 local userAnswer
 local correctAnswer
+local incorrectObject
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -43,6 +44,12 @@ local function HideCorrect()
 	AskQuestion()
 end
 
+local function HideIncorrect()
+	incorrectObject.isVisible = false
+	AskQuestion()
+end
+
+
 local function NumericFieldListener( event )
 	-- user begins editing numericField"
 	if ( event.phase == "began" ) then
@@ -59,6 +66,11 @@ local function NumericFieldListener( event )
 		if (userAnswer == correctAnswer) then
 			correctObject.isVisible = true
 			timer.performWithDelay(2000, HideCorrect)
+
+		elseif 
+
+			-- if the users answer and the correct answer are different
+			incorrectObject.isVisible = true
 		end
 	end
 end
@@ -77,6 +89,10 @@ questionObject:setTextColor( 10/255, 195/255, 164/255 )
 correctObject = display.newText( "Correct!", display.contentWidth/2, display.contentHeight*2/3, nil, 50 )
 correctObject:setTextColor( 10/255, 195/255, 28/255 )
 correctObject.isVisible = false
+
+incorrectObject = display.newText( "Incorrect!", display.contentWidth/2, display.contentHeight*2/3, nil, 50 )
+incorrectObject:setTextColor( 10/255, 195/255, 28/255 )
+incorrectObject.isVisible = false
 
 -- create numeric field
 numericField = native.newTextField( display.contentWidth/2, display.contentHeight/2, 150, 80 )
