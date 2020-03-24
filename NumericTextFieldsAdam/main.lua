@@ -42,11 +42,13 @@ end
 local function HideCorrect()
 	correctObject.isVisible = false
 	AskQuestion()
+	numericField = nil
 end
 
 local function HideIncorrect()
 	incorrectObject.isVisible = false
 	AskQuestion()
+	numericField = nil
 end
 
 
@@ -86,11 +88,11 @@ questionObject = display.newText( "", display.contentWidth/4, display.contentHei
 questionObject:setTextColor( 10/255, 195/255, 164/255 )
 
 -- create the correct text object and make it invisible
-correctObject = display.newText( "Correct!", display.contentWidth/2, display.contentHeight*2/3, nil, 50 )
+correctObject = display.newText( "Correct!", display.contentWidth/2, display.contentHeight*1.5/3, nil, 50 )
 correctObject:setTextColor( 10/255, 195/255, 28/255 )
 correctObject.isVisible = false
 
-incorrectObject = display.newText( "Incorrect!", display.contentWidth/2, display.contentHeight*2/3, nil, 50 )
+incorrectObject = display.newText( "Incorrect!", display.contentWidth/2, display.contentHeight*1.5/3, nil, 50 )
 incorrectObject:setTextColor( 12/255, 255/255, 38/255 )
 incorrectObject.isVisible = false
 
