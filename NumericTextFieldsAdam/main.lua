@@ -42,13 +42,11 @@ end
 local function HideCorrect()
 	correctObject.isVisible = false
 	AskQuestion()
-	numericField = nil
 end
 
 local function HideIncorrect()
 	incorrectObject.isVisible = false
 	AskQuestion()
-	numericField = nil
 end
 
 
@@ -63,6 +61,9 @@ local function NumericFieldListener( event )
 
 		-- when the awnser is submitted (enter key is pressed) set user input to user's answer
 		userAnswer = tonumber(event.target.exit)
+
+		-- clear the text field
+		event.target.text = ""
 
 		-- if the users answer and the correct answer are the same
 		if (userAnswer == correctAnswer) then
