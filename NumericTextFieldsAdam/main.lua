@@ -24,6 +24,10 @@ local userAnswer
 local correctAnswer
 local incorrectObject
 local correctObject
+local points = 0
+local winText
+local wrongAnswers = 0
+local answerText
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -60,7 +64,7 @@ local function NumericFieldListener( event )
 	elseif event.phase == "submitted" then
 
 		-- when the awnser is submitted (enter key is pressed) set user input to user's answer
-		userAnswer = tonumber(event.target.exit)
+		userAnswer = tonumber(event.target.text)
 
 		-- clear the text field
 		event.target.text = ""
@@ -68,17 +72,37 @@ local function NumericFieldListener( event )
 		-- if the users answer and the correct answer are the same
 		if (userAnswer == correctAnswer) then
 			correctObject.isVisible = true
-			timer.performWithDelay(3000, HideCorrect)
+			timer.performWithDelay(1900, HideCorrect)
+			-- give a point if the user gets the correct answer
+			points = points + 1
 
-		elseif (userAnswer ~= correctAnswer) then
+			-- update it in the display object
+			pointsText.text = "Points = " .. points 
+
+		else
 			-- if the users answer and the correct answer are different
 			incorrectObject.isVisible = true
-			timer.performWithDelay(3000, HideIncorrect)
+			timer.performWithDelay(1900, HideIncorrect)
+			-- add to the incorrect answers variable
+			wrongAnswers = wrongAnswers + 1
+			answerText.alpha = 1
 		end
 	end
 end
 	
+local function YouWin( event )
+	if (points == 5) then
+		questionObject.alpha = 0
+		winText.alpha = 1
+	end
+end
 
+local function YouLose( event )
+	if (wrongAnswers == 3) then
+		questionObject.alpha = 0
+		loseText.alpha = 1
+	end
+end
 	
 -----------------------------------------------------------------------------------------
 -- OBJECT CREATION
@@ -87,6 +111,7 @@ end
 -- displays a question and sets the colour
 questionObject = display.newText( "", display.contentWidth/4, display.contentHeight/3, nil, 60 )
 questionObject:setTextColor( 10/255, 195/255, 164/255 )
+questionObject.alpha = 1
 
 -- create the correct text object and make it invisible
 correctObject = display.newText( "Correct!", display.contentWidth/2, display.contentHeight*1.5/3, nil, 50 )
@@ -94,7 +119,7 @@ correctObject:setTextColor( 10/255, 195/255, 28/255 )
 correctObject.isVisible = false
 
 incorrectObject = display.newText( "Incorrect!", display.contentWidth/2, display.contentHeight*1.5/3, nil, 50 )
-incorrectObject:setTextColor( 12/255, 255/255, 38/255 )
+incorrectObject:setTextColor( 50/255, 0/255, 255/255 )
 incorrectObject.isVisible = false
 
 -- create numeric field
@@ -104,9 +129,30 @@ numericField.inputType = "number"
 -- add the event listener for the numeric field
 numericField:addEventListener( "userInput", NumericFieldListener )
 
+-- display the amount of points as a text object
+pointsText = display.newText("Points = " .. points, display.contentWidth/1.3, display.contentHeight/10, nil, 50)
+
+-- display the winText
+winText = display.newText( "YOU WIN!", display.contentWidth/2, display.contentHeight/1.6, nil, 100)
+winText:setTextColor( 12/255, 253/255, 206/255 )
+winText.alpha = 0
+
+-- display the loseText
+loseText = display.newText( "GAME OVER!", display.contentWidth/2, display.contentHeight/1.6, nil, 100)
+loseText.alpha = 0
+
+-- display the correct answer text
+answerText = display.newText( "The correct answer is " .. correctAnswer, display.contentWidth/2, display.contentHeight/1.5, nil, 30)
+
 -----------------------------------------------------------------------------------------
 -- FUNCTION CALLS
 -----------------------------------------------------------------------------------------
 
 -- call the function to ask then question
 AskQuestion()
+
+-- call the function over and over again
+Runtime:addEventListener("enterFrame", YouWin)
+
+-- call the function over and over again
+Runtime:addEventListener("enterFrame", YouLose)
