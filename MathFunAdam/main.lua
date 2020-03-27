@@ -36,8 +36,8 @@ local function AskQuestion()
 	randomOperator = math.random(1,4)
 
 	-- generate 2 random numbers
-	randomNumber1 = math.random(0, 4)
-	randomNumber2 = math.random(0, 4)
+	randomNumber1 = math.random(1, 10)
+	randomNumber2 = math.random(1, 10)
 
 	-- if the random operator is 1, then do addition
 	if (randomOperator == 1) then
@@ -50,20 +50,18 @@ local function AskQuestion()
 
 	-- otherwise, if the random operator is 2, do subtraction
 	elseif (randomOperator == 2) then
-		-- calculate the correct answer
-		correctAnswer = randomNumber1 - randomNumber2
 
-		-- make it so that you can't get a negative sum 
-		if (randomNumber1 <= randomNumber2) then
-			correctAnswer = randomNumber2 - randomNumber1
+		if (randomNumber1 >= randomNumber2) then
+			correctAnswer = randomNumber1 - randomNumber2
+			questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = " 
+
+		else correctAnswer = randomNumber2 - randomNumber1
+			questionObject.text = randomNumber2 .. " - " .. randomNumber1 .. " = "
 		end	
 
-		-- create question in text object
-		questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = " 
-	
 	elseif (randomOperator == 3) then
 		-- calculate the correct answer
-		correctAnswer = randomNumber1 * randomNumber2
+		correctAnswer = math.round(randomNumber1 * randomNumber2)
 
 		-- create the question in text object
 		questionObject.text = randomNumber1 .. " x " .. randomNumber2 .. " = "
@@ -75,6 +73,16 @@ local function AskQuestion()
 		-- create the question in text object
 		questionObject.text = randomNumber1 .. " / " .. randomNumber2 .. " = "
 	end
+end
+
+local function HideCorrect()
+	correctObject.isVisible = false
+	AskQuestion()
+end
+
+local function HideIncorrect()
+	incorrectObject.isVisible = false
+	AskQuestion()
 end
 
 local function NumericFieldListener( event )
