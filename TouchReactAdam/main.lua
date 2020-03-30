@@ -5,29 +5,39 @@
 -- This program does something when I click on the button
 -----------------------------------------------------------------------------------------
 
+-- add the sound file
+local TouchedSound = audio.loadSound( "Sounds/TouchedButtonSound.mp3" )
+local soundChannel
+
 -- set the background coluor
-display.setDefault ( "background", 153/255, 204/255, 255/255 )
+display.setDefault ( "background", 12/255, 253/255, 206/255 )
 
 -- hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
 
 -- create the blue button, set it's position and make it visible
-local blueButton =  display.newImageRect("Images/Fast Button Inactive@2x.png",198, 96)
+local blueButton =  display.newImageRect( "Images/Fast Button Inactive@2x.png",198, 96 )
 blueButton.x = display.contentWidth/2
 blueButton.y = display.contentHeight/2
 blueButton.isVisible = true
 
 -- create red button, set it's position and make it invisible
-local redButton = display.newImageRect("Images/Fast button Active@2x.png",198, 96 ) 
+local redButton = display.newImageRect( "Images/Fast button Active@2x.png",198, 96 ) 
 redButton.x = display.contentWidth/2
 redButton.y = display.contentHeight/2
 redButton.isVisible = false
 
+-- create the image that appears when you click the button
+local yayPicture = display.newImageRect( "Images/yay.jpg", 312.5, 312.5 )
+yayPicture.x = display.contentWidth/2
+yayPicture.y = display.contentHeight/1.28
+yayPicture.isVisible = false
+
 -- create text object, set it's potition and make it insible
-local textObject = display.newText ("Clicked!", 0, 0, nil, 50)
+local textObject = display.newText ( "Clicked!", 0, 0, nil, 50 )
 textObject.x = display.contentWidth/2
 textObject.y = display.contentHeight/3
-textObject:setTextColor (1, 1, 0)
+textObject:setTextColor (1,0,0)
 textObject.isVisible = false
 
 -- function: BlueButtonListener
@@ -40,12 +50,15 @@ local function BlueButtonListener(touch)
 		blueButton.isVisible = false
 		redButton.isVisible = true
 		textObject.isVisible = true
+		soundChannel = audio.play(TouchedSound)
+		yayPicture.isVisible = true
 	end
 
 	if (touch.phase == "ended") then
 		blueButton.isVisible = true
 		redButton.isVisible = false
 		textObject.isVisible = false
+		yayPicture.isVisible = false
 	end
 end
 

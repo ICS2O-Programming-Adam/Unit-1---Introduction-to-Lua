@@ -16,7 +16,7 @@ display.setDefault("background", 155/255, 2/255, 2/255)
 -----------------------------------------------------------------------------------------
 
 -- create the local variables 
-local randomOperator
+local randomOperator 
 local randomNumber1
 local randomNumber2
 local correctAnswer 
@@ -33,7 +33,7 @@ local correctObject
 
 local function AskQuestion()
 	-- generate a random number between 1 and 2
-	randomOperator = math.random(1,4)
+	randomOperator = math.random(1, 4)
 
 	-- generate 2 random numbers
 	randomNumber1 = math.random(1, 10)
@@ -69,6 +69,9 @@ local function AskQuestion()
 	elseif (randomOperator == 4) then
 		-- calculate the correct answer
 		correctAnswer = randomNumber1 / randomNumber2
+		correctAnswer = correctAnswer * 10
+		correctAnswer = math.round(correctAnswer)
+  		correctAnswer = correctAnswer / 10  
 
 		-- create the question in text object
 		questionObject.text = randomNumber1 .. " / " .. randomNumber2 .. " = "
@@ -122,7 +125,7 @@ questionObject = display.newText("", display.contentWidth/4, display.contentHeig
 
 -- create numeric field
 numericField = native.newTextField( display.contentWidth/2, display.contentHeight/3, 200, 80 )
-numericField.inputType = "number"
+numericField.inputType = "decimal"
 
 -- add the event listener for the numeric field
 numericField:addEventListener( "userInput", NumericFieldListener )

@@ -142,7 +142,9 @@ loseText = display.newText( "GAME OVER!", display.contentWidth/2, display.conten
 loseText.alpha = 0
 
 -- display the correct answer text
-answerText = display.newText( "The correct answer is " .. correctAnswer, display.contentWidth/2, display.contentHeight/1.5, nil, 30)
+answerText = display.newText( "The correct answer is ", display.contentWidth/2, display.contentHeight/1.5, nil, 30)
+answerText.alpha = 0
+answerText:setTextColor()
 
 -----------------------------------------------------------------------------------------
 -- FUNCTION CALLS
