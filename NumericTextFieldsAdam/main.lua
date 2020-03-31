@@ -85,14 +85,8 @@ local function NumericFieldListener( event )
 			timer.performWithDelay(1900, HideIncorrect)
 			-- add to the incorrect answers variable
 			wrongAnswers = wrongAnswers + 1
+			answerText.alpha = 1
 		end
-	end
-end
-
-local function DisplayAnswer(event)
-	if (userAnswer ~= correctAnswer) then
-		answerText.text( " The correct answer is " .. correctAnswer)
-		answerText.alpha = 1
 	end
 end
 
@@ -148,7 +142,7 @@ loseText = display.newText( "GAME OVER!", display.contentWidth/2, display.conten
 loseText.alpha = 0
 
 -- display the correct answer text
-answerText = display.newText( "The correct answer is ", display.contentWidth/2, display.contentHeight/1.5, nil, 30)
+answerText = display.newText( "The correct answer is " .. correctAnswer, display.contentWidth/2, display.contentHeight/1.5, nil, 30)
 answerText.alpha = 0
 answerText:setTextColor()
 
@@ -165,4 +159,4 @@ Runtime:addEventListener("enterFrame", YouWin)
 -- call the function over and over again
 Runtime:addEventListener("enterFrame", YouLose)
 
-timer.performWithDelay("enterframe", 1000, DisplayAnswer)
+Runtime:addEventListener("enterframe", DisplayAnswer)
