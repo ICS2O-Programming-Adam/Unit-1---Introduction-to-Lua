@@ -85,11 +85,17 @@ local function NumericFieldListener( event )
 			timer.performWithDelay(1900, HideIncorrect)
 			-- add to the incorrect answers variable
 			wrongAnswers = wrongAnswers + 1
-			answerText.alpha = 1
 		end
 	end
 end
-	
+
+local function DisplayAnswer(event)
+	if (userAnswer ~= correctAnswer) then
+		answerText.text( " The correct answer is " .. correctAnswer)
+		answerText.alpha = 1
+	end
+end
+
 local function YouWin( event )
 	if (points == 5) then
 		questionObject.alpha = 0
@@ -158,3 +164,5 @@ Runtime:addEventListener("enterFrame", YouWin)
 
 -- call the function over and over again
 Runtime:addEventListener("enterFrame", YouLose)
+
+timer.performWithDelay("enterframe", 1000, DisplayAnswer)
