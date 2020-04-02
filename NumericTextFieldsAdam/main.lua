@@ -27,7 +27,6 @@ local correctObject
 local points = 0
 local winText
 local wrongAnswers = 0
-local answerText
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -82,10 +81,10 @@ local function NumericFieldListener( event )
 		else
 			-- if the users answer and the correct answer are different
 			incorrectObject.isVisible = true
+			incorrectObject.text = "           Incorrect \n\nThe correct answer is " .. correctAnswer
 			timer.performWithDelay(1900, HideIncorrect)
 			-- add to the incorrect answers variable
 			wrongAnswers = wrongAnswers + 1
-			answerText.alpha = 1
 		end
 	end
 end
@@ -118,7 +117,7 @@ correctObject = display.newText( "Correct!", display.contentWidth/2, display.con
 correctObject:setTextColor( 10/255, 195/255, 28/255 )
 correctObject.isVisible = false
 
-incorrectObject = display.newText( "Incorrect!", display.contentWidth/2, display.contentHeight*1.5/3, nil, 50 )
+incorrectObject = display.newText( "Incorrect!", display.contentWidth/2, display.contentHeight*1.7/3, nil, 50 )
 incorrectObject:setTextColor( 50/255, 0/255, 255/255 )
 incorrectObject.isVisible = false
 
@@ -141,11 +140,6 @@ winText.alpha = 0
 loseText = display.newText( "GAME OVER!", display.contentWidth/2, display.contentHeight/1.6, nil, 100)
 loseText.alpha = 0
 
--- display the correct answer text
-answerText = display.newText( "The correct answer is " .. correctAnswer, display.contentWidth/2, display.contentHeight/1.5, nil, 30)
-answerText.alpha = 0
-answerText:setTextColor()
-
 -----------------------------------------------------------------------------------------
 -- FUNCTION CALLS
 -----------------------------------------------------------------------------------------
@@ -158,5 +152,3 @@ Runtime:addEventListener("enterFrame", YouWin)
 
 -- call the function over and over again
 Runtime:addEventListener("enterFrame", YouLose)
-
-Runtime:addEventListener("enterframe", DisplayAnswer)

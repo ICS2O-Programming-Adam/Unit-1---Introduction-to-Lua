@@ -1,14 +1,15 @@
 -- Title: MovingObjects
 -- Name: Adam Winogron
 -- Course: ICS2O/3C
--- This program moves a beetleship across 
--- the screen and then makes it fade in.
--- I added a second object that 
--- moves in a different direction, 
--- fades out and grows in size.
+-- This program moves a beetleship across the screen and then makes it fade in.
+-- I added a second object that moves in a different direction, fades out and grows in size.
 
 -- hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
+
+-- play the background music 
+local soundChannel = audio.loadStream("Sounds/bkgMusic.mp3")
+audio.play(soundChannel, {loops = -1})
 
 -- global variables
 scrollSpeed = 3

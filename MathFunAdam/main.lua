@@ -25,7 +25,10 @@ local numericField
 local userAnswer
 local incorrectObject
 local correctObject
-
+local correctSound = audio.loadSound("Sounds/correctSound.mp3")
+local correctSoundChannel
+local incorrectSound = audio.loadSound("Sounds/incorrectSound.mp3")
+local incorrectSoundChannel
 ----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 ----------------------------------------------------------------------------------------
@@ -107,11 +110,12 @@ local function NumericFieldListener( event )
 		if (userAnswer == correctAnswer) then
 			correctObject.isVisible = true
 			timer.performWithDelay(1900, HideCorrect)
-
+			correctSoundChannel = audio.play(correctSound)
 		else
 			-- if the users answer and the correct answer are different
 			incorrectObject.isVisible = true
 			timer.performWithDelay(1900, HideIncorrect)
+			incorrectSoundChannel = audio.play(incorrectSound)
 		end
 	end
 end
@@ -138,6 +142,7 @@ correctObject.isVisible = false
 incorrectObject = display.newText( "Incorrect!", display.contentWidth/2, display.contentHeight*1.5/3, nil, 50 )
 incorrectObject:setTextColor( 50/255, 0/255, 255/255 )
 incorrectObject.isVisible = false
+
 -----------------------------------------------------------------------------------------
 -- FUNCTION CALLS
 -----------------------------------------------------------------------------------------
