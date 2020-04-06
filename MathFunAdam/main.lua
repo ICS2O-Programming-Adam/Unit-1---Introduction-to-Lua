@@ -92,15 +92,43 @@ local function AskQuestion()
 	end
 end
 
+
 local function HideCorrect()
 	correctObject.isVisible = false
 	AskQuestion()
 end
 
+
 local function HideIncorrect()
 	incorrectObject.isVisible = false
 	AskQuestion()
 end
+
+
+local function Lose()
+	if (lives == 1) then
+		loseText.isVisible = true
+		loseImage.isVisible = true
+		timer.cancel(countDownTimer)
+		clockText.isVisible = false
+		questionObject.isVisible = false
+	end
+end
+
+
+local function LoseLives()
+	if (lives == 4) then
+		heart4.isVisible = false
+	elseif (lives == 3) then
+		heart3.isVisible = false
+	elseif (lives == 2) then
+		heart2.isVisible = false
+	elseif (lives == 1) then
+		heart1.isVisible = false
+		Lose()
+	end
+end
+
 
 local function NumericFieldListener( event )
 	-- user begins editing numericField"
@@ -129,6 +157,7 @@ local function NumericFieldListener( event )
 			timer.performWithDelay(1900, HideIncorrect)
 			incorrectSoundChannel = audio.play(incorrectSound)
 			lives = lives - 1
+			LoseLives()
 			secondsLeft = totalSeconds
 
 		end
@@ -148,26 +177,7 @@ local function UpdateTime()
 		-- reset the number of seconds left 
 		secondsLeft = totalSeconds
 		lives = lives - 1
-	end
-end
-
-local function LoseLives()
-	if (lives == 4) then
-		heart4.isVisible = false
-	elseif (lives == 3) then
-		heart3.isVisible = false
-	elseif (lives == 2) then
-		heart2.isVisible = false
-	elseif (lives == 1) then
-		heart1.isVisible = false
-	end
-end
-
-local function Lose()
-	if (lives == 0) then
-		loseText.isVisible = true
-		loseImage,isVisible = true
-		timer.cancel(countDownTimer)
+		LoseLives()
 	end
 end
 
@@ -177,6 +187,8 @@ local function StartTimer()
 	countDownTimer = timer.performWithDelay( 1000, UpdateTime, 0 )
 end
 
+
+	
 -----------------------------------------------------------------------------------------
 -- OBJECT CREATION
 -----------------------------------------------------------------------------------------
@@ -218,6 +230,7 @@ heart4.y = display.contentHeight * 1 / 7
 
 clockText = display.newText("Time Left: ", 200, 100, nil, 50)
 clockText:setTextColor(0,1,1)
+clockText.isVisible = true
 
 loseText = display.newText("Game Over!", display.contentWidth/2, display.contentHeight/1.7, nil, 100)
 loseText.isVisible = false
