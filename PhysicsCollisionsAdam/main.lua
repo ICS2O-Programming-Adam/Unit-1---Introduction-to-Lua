@@ -62,9 +62,6 @@ local wall = display.newImage("Images/beam_long.png", 0, 0)
 	wall.width = display.contentWidth/10
 	wall.height = display.contentHeight
 
-	-- rotate the wall so it's vertical
-	--wall:rotate(90)
-
 	-- send it to the back layer
 	wall:toBack()
 
@@ -95,32 +92,44 @@ local function FirstBall()
 	-- creating first ball
 	local ball1 = display.newImage("Images/super_ball.png", 0, 0)
 
+	ball1.width = 75
+	ball1.height = 75
+
 	-- add to physics
-	physics.addBody(ball1, {density = 5.0, friction = 0.1, bounce = 1, radius = 25})
+	physics.addBody(ball1, {density = 5.0, friction = 0.1, bounce = 1, radius = 35})
 end
 
 local function SecondBall()
 	--create the second ball
 	local ball2 = display.newImage("Images/super_ball.png", 0, 0)
 
+	ball2.width = 25
+	ball2.height = 25
+
 	-- add to physics
-	physics.addBody(ball2, {density = 1.0, friction = 0.5, bounce = 0.3, radius = 12.5})
+	physics.addBody(ball2, {density = 1.0, friction = 4, bounce = 0.3, radius = 12.5})
 end
 
 local function ThirdBall()
 	--create the third ball
 	local ball3 = display.newImage("Images/super_ball.png", 0, 0)
 
+	ball3.width = 8
+	ball3.height = 8
+
 	-- add to physics
-	physics.addBody(ball3, {density = 1.0, friction = 0.5, bounce = 0.8, radius = 4})
+	physics.addBody(ball3, {density = 2.0, friction = 0.5, bounce = 0.7, radius = 4})
 end
 
 local function FourthBall()
 	--create the fourth ball
 	local ball4 = display.newImage("Images/super_ball.png", 0, 0)
 
+	ball4.width = 150
+	ball4.height = 150
+
 	-- add to physics
-	physics.addBody(ball4, {density = 1.0, friction = 0.5, bounce = 0.8, radius = 75})
+	physics.addBody(ball4, {density = 5.0, friction = 0.5, bounce = 0.8, radius = 75})
 end
 -----------------------------------------------------------------------------------------
 -- TIMER DELAYS - call each function after the given millisecond
